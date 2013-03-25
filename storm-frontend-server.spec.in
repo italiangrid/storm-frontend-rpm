@@ -4,10 +4,10 @@
 
 %define default_user root
 
-%define boostdevel boost141-devel
+%define boostsuffix 141
 
 %if 0%{?el6}
-%define boostdevel boost-devel
+%define boostsuffix %{nil}
 %endif
 
 Name: 		storm-frontend-server
@@ -29,7 +29,7 @@ Summary:        The StoRM FrontEnd component
 BuildRequires: libtool
 BuildRequires: autoconf
 BuildRequires: automake
-BuildRequires: %{boostdevel}
+BuildRequires: boost%{boostsuffix}-devel
 BuildRequires: curl-devel
 BuildRequires: globus-gssapi-gsi-devel
 BuildRequires: globus-gss-assist-devel
@@ -61,8 +61,8 @@ Requires: storm-xmlrpc-c
 Requires: storm-xmlrpc-c-client
 Requires: voms
 Requires: CGSI-gSOAP
-Requires: %{boostdevel}-program-options
-Requires: %{boostdevel}-thread
+Requires: boost%{boostsuffix}-program-options
+Requires: boost%{boostsuffix}-thread
 Requires: gsoap
 
 %define debug_package %{nil}
