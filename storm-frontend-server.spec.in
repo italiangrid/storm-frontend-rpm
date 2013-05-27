@@ -240,6 +240,9 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Mon May 27 2013 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 1.8.1-2
+- Packaging code refactoring
+
 * Mon May 02 2011 Elisabetta Roncheiri <elisabetta.ronchieri@cnaf.infn.it> - 1.7.0-5.sl5
 - Added BuildRequires in spec file
 - Added src in the src tar file
