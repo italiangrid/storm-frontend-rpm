@@ -26,9 +26,6 @@ Group:          Applications/System
 AutoReqProv:    yes
 Summary:        The StoRM FrontEnd component 
 
-BuildRequires: libtool
-BuildRequires: autoconf
-BuildRequires: automake
 BuildRequires: boost%{boostsuffix}-devel
 BuildRequires: curl-devel
 BuildRequires: globus-gssapi-gsi-devel
@@ -79,8 +76,14 @@ GPFS from IBM and Lustre from SUN.
 %setup -q -n storm-frontend-server
 
 %build
-./bootstrap 
-./configure --prefix=/usr --sbindir=/usr/sbin --datadir=/usr/share --localstatedir=/var --sysconfdir=/etc     
+# ./configure --prefix=/usr --sbindir=/usr/sbin --datadir=/usr/share --localstatedir=/var --sysconfdir=/etc     
+
+%if 0%{?el6}
+./configure --prefix=/usr --sbindir=/usr/sbin --datadir=/usr/share --localstatedir=/var --sysconfdir=/etc
+%else
+## SL5
+./configure --with-boost=/usr/include/boost141 LDFLAGS=-L/usr/lib64/boost141 --prefix=/usr --sbindir=/usr/sbin --datadir=/usr/share --localstatedir=/var --sysconfdir=/etc
+%endif
 make
 
 %pre
