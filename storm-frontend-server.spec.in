@@ -62,8 +62,6 @@ Requires: boost%{boostsuffix}-program-options
 Requires: boost%{boostsuffix}-thread
 Requires: gsoap
 
-%define debug_package %{nil}
-
 %description
 This is the installation bundle for the StoRM FrontEnd server.
 
@@ -76,13 +74,10 @@ GPFS from IBM and Lustre from SUN.
 %setup -q -n storm-frontend-server
 
 %build
-# ./configure --prefix=/usr --sbindir=/usr/sbin --datadir=/usr/share --localstatedir=/var --sysconfdir=/etc     
-
 %if 0%{?el6}
-./configure --prefix=/usr --sbindir=/usr/sbin --datadir=/usr/share --localstatedir=/var --sysconfdir=/etc
+%configure
 %else
-## SL5
-./configure --with-boost=/usr/include/boost141 LDFLAGS=-L/usr/lib64/boost141 --prefix=/usr --sbindir=/usr/sbin --datadir=/usr/share --localstatedir=/var --sysconfdir=/etc
+%configure --with-boost=/usr/include/boost141 LDFLAGS=-L/usr/lib64/boost141
 %endif
 make
 
