@@ -11,7 +11,7 @@
 %endif
 
 Name: 		storm-frontend-server
-Version: 	1.8.3
+Version: 	1.8.4
 Release: 	1%{?dist}
 
 Vendor:         EMI
@@ -26,9 +26,6 @@ Group:          Applications/System
 AutoReqProv:    yes
 Summary:        The StoRM FrontEnd component 
 
-BuildRequires: libtool
-BuildRequires: autoconf
-BuildRequires: automake
 BuildRequires: boost%{boostsuffix}-devel
 BuildRequires: curl-devel
 BuildRequires: globus-gssapi-gsi-devel
@@ -65,8 +62,6 @@ Requires: boost%{boostsuffix}-program-options
 Requires: boost%{boostsuffix}-thread
 Requires: gsoap
 
-%define debug_package %{nil}
-
 %description
 This is the installation bundle for the StoRM FrontEnd server.
 
@@ -79,8 +74,11 @@ GPFS from IBM and Lustre from SUN.
 %setup -q -n storm-frontend-server
 
 %build
-./bootstrap 
-./configure --prefix=/usr --sbindir=/usr/sbin --datadir=/usr/share --localstatedir=/var --sysconfdir=/etc     
+%if 0%{?el6}
+%configure
+%else
+%configure --with-boost=/usr/include/boost141 LDFLAGS=-L/usr/lib64/boost141
+%endif
 make
 
 %pre
@@ -187,16 +185,10 @@ fi
 #during an upgrade, the value of the argument passed in is 1
 #during an uninstall, the value of the argument passed in is 0
 if [ "$1" = "0" ] ; then
-  echo 'stop service'
   /sbin/service %{longname} stop >/dev/null 2>&1 || :
-  echo 'del service from chkconfig'
   /sbin/chkconfig --del %{longname}
 fi;
 if [ "$1" = "1" ] ; then
-  echo "The StoRM FrontEnd server has been upgraded but NOT configured yet.
-You need to use yaim to configure the server.
-"
-  echo 'stop service'
   /sbin/service %{longname} stop >/dev/null 2>&1 || :
 fi;
 
@@ -204,14 +196,9 @@ fi;
 #during an upgrade, the value of the argument passed in is 1
 #during an uninstall, the value of the argument passed in is 0
 if [ "$1" = "1" ] ; then
-  echo "The StoRM FrontEnd server has been upgraded but NOT configured yet.
-You need to use yaim to configure the server.
-"
-  echo 'stop service'
   /sbin/service %{longname} stop >/dev/null 2>&1 || :
 fi;
 if [ "$1" = "0" ] ; then
-  echo 'remove old file'
   rm -f /etc/init.d/%{longname}.*
   rm -f /etc/cron.d/%{longname}.cron.*
 fi
@@ -231,6 +218,7 @@ fi
 %doc %{_datadir}/doc/%{name}-%{version}/CREDITS
 %doc %{_datadir}/doc/%{name}-%{version}/LICENSE
 %doc %{_datadir}/doc/%{name}-%{version}/README
+%doc %{_datadir}/doc/%{name}-%{version}/README.md
 
 %doc %dir %{_datadir}/wsdl
 %doc %{_datadir}/wsdl/srm.v2.2.wsdl
@@ -241,6 +229,11 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Tue Oct 22 2013 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 1.8.4-1
+- Improved exception handling and error reporting
+- Fix for https://issues.infn.it/jira/browse/STOR-343
+- Fix for https://issues.infn.it/jira/browse/STOR-344
+
 * Fri Aug 23 2013 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 1.8.3-1
 - Fix for https://issues.infn.it/jira/browse/STOR-331
 
