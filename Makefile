@@ -1,6 +1,6 @@
 name=storm-frontend-server
 
-tag=FE_1.8
+tag=master
 
 # the Github repo
 git=git://github.com/italiangrid/storm-frontend.git
