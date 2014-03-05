@@ -11,8 +11,8 @@
 %endif
 
 Name: 		storm-frontend-server
-Version: 	1.8.4
-Release: 	1%{?dist}
+Version: 	1.8.5
+Release: 	0%{?dist}
 
 Vendor:         EMI
 Packager:       Elisabetta Ronchieri <elisabetta.ronchieri@cnaf.infn.it> 
@@ -229,6 +229,9 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Tue Oct 22 2013 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 1.8.5-0
+- Fix for https://issues.infn.it/jira/browse/STOR-500
+
 * Tue Oct 22 2013 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 1.8.4-1
 - Improved exception handling and error reporting
 - Fix for https://issues.infn.it/jira/browse/STOR-343
