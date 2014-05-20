@@ -12,7 +12,7 @@
 
 Name: 		storm-frontend-server
 Version: 	1.8.5
-Release: 	0%{?dist}
+Release: 	1%{?dist}
 
 Vendor:         EMI
 Packager:       Elisabetta Ronchieri <elisabetta.ronchieri@cnaf.infn.it> 
@@ -223,11 +223,8 @@ fi;
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
-* Wed Mar 19 2014 Daniele Andreotti <daniele.andreotti@cnaf.infn.it> - 1.8.5-0
-- Fix for https://issues.infn.it/jira/browse/STOR-596
-
-* Tue Oct 22 2013 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 1.8.5-0
-- Fix for https://issues.infn.it/jira/browse/STOR-500
+* Tue May 20 2014 Daniele Andreotti <daniele.andreotti@cnaf.infn.it> - 1.8.5-1
+- Bumped packaging version for 1.8.5 release
 
 * Tue Oct 22 2013 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 1.8.4-1
 - Improved exception handling and error reporting
