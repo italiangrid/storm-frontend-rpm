@@ -11,7 +11,7 @@
 %endif
 
 Name: 		storm-frontend-server
-Version: 	1.8.4
+Version: 	1.8.5
 Release: 	1%{?dist}
 
 Vendor:         EMI
@@ -134,8 +134,6 @@ if [ "$1" = "2" ] ; then
   echo "The StoRM FrontEnd server has been upgraded but NOT configured yet.
 You need to use yaim to configure the server.
 "
-  echo 'stop service'
-  /sbin/service %{longname} stop >/dev/null 2>&1 || :
 fi;
 
 TMP_FOLDER=%{_sysconfdir}/%{prefixname}/tmp/storm_permissions_mantainance
@@ -185,23 +183,19 @@ fi
 #during an upgrade, the value of the argument passed in is 1
 #during an uninstall, the value of the argument passed in is 0
 if [ "$1" = "0" ] ; then
-  /sbin/service %{longname} stop >/dev/null 2>&1 || :
   /sbin/chkconfig --del %{longname}
-fi;
-if [ "$1" = "1" ] ; then
-  /sbin/service %{longname} stop >/dev/null 2>&1 || :
 fi;
 
 %postun
 #during an upgrade, the value of the argument passed in is 1
 #during an uninstall, the value of the argument passed in is 0
 if [ "$1" = "1" ] ; then
-  /sbin/service %{longname} stop >/dev/null 2>&1 || :
+  echo "A restart of the service is needed to make the new version effective"
 fi;
 if [ "$1" = "0" ] ; then
   rm -f /etc/init.d/%{longname}.*
   rm -f /etc/cron.d/%{longname}.cron.*
-fi
+fi;
 
 %files
 %defattr(-,%{default_user},%{default_user},-)
@@ -229,6 +223,9 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Tue May 20 2014 Daniele Andreotti <daniele.andreotti@cnaf.infn.it> - 1.8.5-1
+- Bumped packaging version for 1.8.5 release
+
 * Tue Oct 22 2013 Andrea Ceccanti <andrea.ceccanti@cnaf.infn.it> - 1.8.4-1
 - Improved exception handling and error reporting
 - Fix for https://issues.infn.it/jira/browse/STOR-343
