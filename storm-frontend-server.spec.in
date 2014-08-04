@@ -28,6 +28,7 @@ Summary:        The StoRM FrontEnd component
 
 BuildRequires: boost%{boostsuffix}-devel
 BuildRequires: curl-devel
+BuildRequires: mysql-devel
 BuildRequires: globus-gssapi-gsi-devel
 BuildRequires: globus-gss-assist-devel
 BuildRequires: globus-common-devel
