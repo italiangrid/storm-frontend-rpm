@@ -225,7 +225,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Fri Oct 31 2014 Daniele Andreotti <daniele.andreotti@cnaf.infn.it> - 1.8.6-1
-- Bumped packaging version for 1.8.5 release
+- Bumped packaging version for 1.8.6 release
 
 * Tue May 20 2014 Daniele Andreotti <daniele.andreotti@cnaf.infn.it> - 1.8.5-1
 - Bumped packaging version for 1.8.5 release
