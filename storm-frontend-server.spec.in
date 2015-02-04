@@ -11,8 +11,8 @@
 %endif
 
 Name: 		storm-frontend-server
-Version: 	1.8.6
-Release: 	1%{?dist}
+Version: 	1.8.7
+Release: 	0%{?dist}
 
 Vendor:         EMI
 Packager:       Elisabetta Ronchieri <elisabetta.ronchieri@cnaf.infn.it> 
@@ -224,6 +224,9 @@ fi;
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Wed Feb 4 2015 Enrico Vianello <enrico.vianello@cnaf.infn.it> - 1.8.7-0
+- Bumped packaging version to 1.8.7-0
+
 * Fri Oct 31 2014 Daniele Andreotti <daniele.andreotti@cnaf.infn.it> - 1.8.6-1
 - Bumped packaging version for 1.8.6 release
 
