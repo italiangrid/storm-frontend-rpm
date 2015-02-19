@@ -11,8 +11,8 @@
 %endif
 
 Name: 		storm-frontend-server
-Version: 	1.8.7
-Release: 	1%{?dist}
+Version: 	1.8.8
+Release: 	0%{?dist}
 
 Vendor:         EMI
 Packager:       Elisabetta Ronchieri <elisabetta.ronchieri@cnaf.infn.it> 
