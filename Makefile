@@ -13,6 +13,7 @@ rpmbuild_dir=$(shell pwd)/rpmbuild
 spec_src=$(name).spec.in
 spec=$(name).spec
 
+dist=.el6
 
 # determine the rpm version
 rpm_version=$(shell grep "Version:" $(spec) | sed -e "s/Version://g" -e "s/[ \t]*//g")
@@ -44,7 +45,7 @@ rpm: prepare-spec
 		$(rpmbuild_dir)/SPECS \
 		$(rpmbuild_dir)/SRPMS
 	cp $(source_dir)/$(name).tar.gz $(rpmbuild_dir)/SOURCES/$(name)-$(rpm_version).tar.gz
-	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)"
+	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)" --define "dist $(dist)"
 
 clean:
 	rm -rf $(source_dir) $(rpmbuild_dir) $(spec)
